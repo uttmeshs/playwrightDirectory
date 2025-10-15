@@ -2,6 +2,10 @@
 
 A comprehensive, interactive dashboard for Playwright automation testing commands. This React application provides a searchable interface to browse, learn, and reference Playwright commands with detailed syntax, parameters, examples, and documentation links.
 
+## Live Demo
+
+**[Try it live at https://playwrightdirectory.netlify.app/](https://playwrightdirectory.netlify.app/)**
+
 ## Features
 
 - **Smart Search**: Find commands by name, category, or description
