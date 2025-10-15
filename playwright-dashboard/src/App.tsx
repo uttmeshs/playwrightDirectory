@@ -69,7 +69,6 @@ const AppContent: React.FC = () => {
           elevation={2}
           sx={{ 
             p: { xs: 2, sm: 3, md: 4 }, 
-            borderRadius: 0,
             backgroundColor: 'background.paper',
             border: 1,
             borderColor: 'divider',
