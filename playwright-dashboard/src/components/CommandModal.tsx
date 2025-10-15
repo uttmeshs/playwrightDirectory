@@ -178,7 +178,7 @@ const CommandModal: React.FC<CommandModalProps> = ({ command, open, onClose }) =
             <Box
               key={index}
               sx={{
-                backgroundColor: 'action.hover',
+                backgroundColor: 'background.paper',
                 p: 2,
                 borderRadius: 1,
                 border: 1,
