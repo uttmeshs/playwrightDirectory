@@ -18,27 +18,33 @@ const CommandGrid: React.FC<CommandGridProps> = ({
 }) => {
   if (commands.length === 0) {
     return (
-      <Box
-        sx={{
-          textAlign: 'center',
-          py: 8,
-          backgroundColor: 'background.paper',
-          borderRadius: 2,
-          border: 1,
-          borderColor: 'divider',
-        }}
-      >
-        <Typography variant="h5" component="h2" gutterBottom color="text.secondary">
-          No commands found
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {searchTerm 
-            ? `No commands match "${searchTerm}"`
-            : selectedCategory 
-            ? `No commands in ${selectedCategory} category`
-            : 'No commands available'
-          }
-        </Typography>
+      <Box sx={{ width: '100%', maxWidth: '100%' }}>
+        <Box
+          sx={{
+            textAlign: 'center',
+            py: 8,
+            px: 4,
+            backgroundColor: 'background.paper',
+            borderRadius: 2,
+            border: 1,
+            borderColor: 'divider',
+            width: '100%',
+            maxWidth: '100%',
+            mx: 'auto',
+          }}
+        >
+          <Typography variant="h5" component="h2" gutterBottom color="text.secondary">
+            No commands found
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            {searchTerm 
+              ? `No commands match "${searchTerm}"`
+              : selectedCategory 
+              ? `No commands in ${selectedCategory} category`
+              : 'No commands available'
+            }
+          </Typography>
+        </Box>
       </Box>
     );
   }

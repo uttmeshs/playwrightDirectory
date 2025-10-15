@@ -68,6 +68,9 @@ const AppContent: React.FC = () => {
             width: '100%',
             maxWidth: 'none',
             mx: 0,
+            minHeight: '400px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
             <Box sx={{ mb: 4, textAlign: 'center' }}>
@@ -105,12 +108,14 @@ const AppContent: React.FC = () => {
               activeCategory={selectedCategory}
             />
             
-            <CommandGrid 
-              commands={filteredCommands}
-              onCommandClick={handleCommandClick}
-              searchTerm={searchTerm}
-              selectedCategory={selectedCategory}
-            />
+            <Box sx={{ flexGrow: 1, width: '100%' }}>
+              <CommandGrid 
+                commands={filteredCommands}
+                onCommandClick={handleCommandClick}
+                searchTerm={searchTerm}
+                selectedCategory={selectedCategory}
+              />
+            </Box>
           </Paper>
       </Box>
       
