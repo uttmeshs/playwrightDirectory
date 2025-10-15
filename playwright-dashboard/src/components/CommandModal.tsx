@@ -142,7 +142,7 @@ const CommandModal: React.FC<CommandModalProps> = ({ command, open, onClose }) =
               Parameters
             </Typography>
             {command.parameters.map((param, index) => (
-              <Box key={index} sx={{ mb: 2, p: 2, backgroundColor: 'background.default', borderRadius: 1 }}>
+              <Box key={param.name} sx={{ mb: 2, p: 2, backgroundColor: 'background.default', borderRadius: 1 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                   <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
                     {param.name}
