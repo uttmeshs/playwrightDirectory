@@ -1,18 +1,11 @@
 import React from 'react';
 import { Box, Typography, Chip } from '@mui/material';
+import { categories } from '../utils/categoryUtils';
 
 interface CategoryLegendProps {
   onCategoryFilter?: (category: string | null) => void;
   activeCategory?: string | null;
 }
-
-const categories = [
-  { name: 'locators', label: 'Locators', color: '#3b82f6', count: 15 },
-  { name: 'actions', label: 'Actions', color: '#10b981', count: 12 },
-  { name: 'assertions', label: 'Assertions', color: '#f59e0b', count: 8 },
-  { name: 'navigation', label: 'Navigation', color: '#8b5cf6', count: 10 },
-  { name: 'browser', label: 'Browser/Context', color: '#ef4444', count: 13 },
-];
 
 const CategoryLegend: React.FC<CategoryLegendProps> = ({ 
   onCategoryFilter, 

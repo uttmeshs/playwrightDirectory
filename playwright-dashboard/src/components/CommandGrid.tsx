@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import type { PlaywrightCommand } from '../types/command';
 import CommandCard from './CommandCard';
+import SectionHeader from './common/SectionHeader';
+import { commonStyles } from '../utils/styleConstants';
 
 interface CommandGridProps {
   commands: PlaywrightCommand[];
@@ -16,71 +18,66 @@ const CommandGrid: React.FC<CommandGridProps> = ({
   searchTerm,
   selectedCategory 
 }) => {
-  if (commands.length === 0) {
-    return (
-      <Box
-        sx={{
-          textAlign: 'center',
-          py: 8,
-          backgroundColor: 'background.paper',
-          borderRadius: 2,
-          border: 1,
-          borderColor: 'divider',
-        }}
-      >
-        <Typography variant="h5" component="h2" gutterBottom color="text.secondary">
-          No commands found
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {searchTerm 
-            ? `No commands match "${searchTerm}"`
-            : selectedCategory 
-            ? `No commands in ${selectedCategory} category`
-            : 'No commands available'
-          }
-        </Typography>
-      </Box>
-    );
-  }
+  const getHeaderTitle = () => {
+    if (searchTerm) {
+      return `Found ${commands.length} command${commands.length !== 1 ? 's' : ''} matching "${searchTerm}"`;
+    }
+    if (selectedCategory) {
+      return `${commands.length} ${selectedCategory} command${commands.length !== 1 ? 's' : ''}`;
+    }
+    return `All ${commands.length} Playwright Commands`;
+  };
 
+  const getEmptyStateMessage = () => {
+    if (searchTerm) {
+      return `No commands match "${searchTerm}"`;
+    }
+    if (selectedCategory) {
+      return `No commands in ${selectedCategory} category`;
+    }
+    return 'No commands available';
+  };
+
+  // UNIFIED LAYOUT STRUCTURE - SAME FOR ALL SCENARIOS
   return (
-    <Box sx={{ width: '100%', maxWidth: '100%' }}>
-      <Box sx={{ mb: 3, textAlign: 'center' }}>
-        <Typography variant="h6" component="h2" gutterBottom>
-          {searchTerm 
-            ? `Found ${commands.length} command${commands.length !== 1 ? 's' : ''} matching "${searchTerm}"`
-            : selectedCategory 
-            ? `${commands.length} ${selectedCategory} command${commands.length !== 1 ? 's' : ''}`
-            : `All ${commands.length} Playwright Commands`
-          }
-        </Typography>
-      </Box>
+    <Box sx={commonStyles.unifiedContainer}>
+      {/* Header - Only show when there are results */}
+      {commands.length > 0 && <SectionHeader title={getHeaderTitle()} />}
       
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: {
-            xs: '1fr',
-            sm: 'repeat(2, 1fr)',
-            md: 'repeat(3, 1fr)',
-            lg: 'repeat(4, 1fr)',
-            xl: 'repeat(6, 1fr)',
-          },
-          gridAutoRows: 'minmax(120px, auto)',
-          gap: 2,
-          width: '100%',
-          maxWidth: '100%',
-          margin: 0,
-          padding: 0,
-        }}
-      >
-        {commands.map((command) => (
-          <CommandCard 
-            key={command.id}
-            command={command} 
-            onClick={onCommandClick}
-          />
-        ))}
+      {/* Content area - ALWAYS full width */}
+      <Box sx={commonStyles.contentArea}>
+        {commands.length === 0 ? (
+          // Empty state - clean message only
+          <Box sx={commonStyles.emptyStateLayout}>
+            <Box sx={commonStyles.emptyStateMessage}>
+              <Box sx={{ fontSize: '1.125rem', color: 'text.secondary', fontWeight: 500 }}>
+                {getEmptyStateMessage()}
+              </Box>
+            </Box>
+          </Box>
+        ) : commands.length === 1 ? (
+          // Single result - centered layout
+          <Box sx={commonStyles.singleResultLayout}>
+            <Box sx={commonStyles.singleCardWrapper}>
+              <CommandCard 
+                command={commands[0]} 
+                onClick={onCommandClick}
+              />
+            </Box>
+          </Box>
+        ) : (
+          // Multiple results - grid layout
+          <Box sx={commonStyles.gridLayout}>
+            {commands.map((command) => (
+              <Box key={command.id} sx={commonStyles.gridCardWrapper}>
+                <CommandCard 
+                  command={command} 
+                  onClick={onCommandClick}
+                />
+              </Box>
+            ))}
+          </Box>
+        )}
       </Box>
     </Box>
   );
