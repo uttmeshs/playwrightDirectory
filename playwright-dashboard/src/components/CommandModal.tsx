@@ -19,9 +19,10 @@ interface CommandModalProps {
   command: PlaywrightCommand | null;
   open: boolean;
   onClose: () => void;
+  onRelatedCommandClick?: (commandName: string) => void;
 }
 
-const CommandModal: React.FC<CommandModalProps> = ({ command, open, onClose }) => {
+const CommandModal: React.FC<CommandModalProps> = ({ command, open, onClose, onRelatedCommandClick }) => {
   if (!command) return null;
 
   const categoryColor = getCategoryColor(command.category);
@@ -214,7 +215,15 @@ const CommandModal: React.FC<CommandModalProps> = ({ command, open, onClose }) =
                   label={relatedCommand}
                   variant="outlined"
                   size="small"
-                  sx={{ fontFamily: 'monospace' }}
+                  clickable
+                  onClick={() => onRelatedCommandClick?.(relatedCommand)}
+                  sx={{ 
+                    fontFamily: 'monospace',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      backgroundColor: 'action.hover',
+                    }
+                  }}
                 />
               ))}
             </Box>
