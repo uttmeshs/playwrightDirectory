@@ -6,7 +6,7 @@ import {
   IconButton, 
   Link
 } from '@mui/material';
-import { GitHub, Code, Email, Twitter, LinkedIn } from '@mui/icons-material';
+import { GitHub, Code, Twitter, LinkedIn } from '@mui/icons-material';
 
 const Footer: React.FC = () => {
   return (
