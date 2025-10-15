@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { ThemeProvider, useTheme } from './hooks/useTheme';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
@@ -7,6 +7,8 @@ import Footer from './components/Footer';
 import CommandGrid from './components/CommandGrid';
 import CategoryLegend from './components/CategoryLegend';
 import CommandModal from './components/CommandModal';
+import SectionHeader from './components/common/SectionHeader';
+import { commonStyles } from './utils/styleConstants';
 import { playwrightCommands, searchCommands, getCommandsByCategory } from './data/playwrightCommands';
 import type { PlaywrightCommand } from './types/command';
 
@@ -52,51 +54,41 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ 
+      minHeight: '100vh', 
+      ...commonStyles.flexColumn,
+      ...commonStyles.fullWidth
+    }}>
       <Header theme={theme} />
       
-      <Box component="main" sx={{ flexGrow: 1, py: 4, px: { xs: 1, sm: 2, md: 3 }, width: '100%' }}>
+      <Box component="main" sx={{ 
+        flexGrow: 1, 
+        ...commonStyles.fullWidth
+      }}>
         <Paper 
           elevation={2}
           sx={{ 
             p: { xs: 2, sm: 3, md: 4 }, 
-            borderRadius: 3,
+            borderRadius: 0,
             backgroundColor: 'background.paper',
             border: 1,
             borderColor: 'divider',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-            width: '100%',
-            maxWidth: 'none',
-            mx: 0,
             minHeight: '400px',
-            display: 'flex',
-            flexDirection: 'column',
+            ...commonStyles.flexColumn,
+            width: '100vw',
+            maxWidth: '100vw',
+            minWidth: '100vw',
+            margin: 0,
+            marginLeft: 0,
+            marginRight: 0,
           }}
         >
-            <Box sx={{ mb: 4, textAlign: 'center' }}>
-              <Typography 
-                variant="h4" 
-                component="h1" 
-                gutterBottom 
-                sx={{ 
-                  fontWeight: 700,
-                  background: 'linear-gradient(45deg, #00ff00, #0080ff)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  mb: 1
-                }}
-              >
-                Playwright Commands Dashboard
-              </Typography>
-              <Typography 
-                variant="subtitle1" 
-                color="text.secondary"
-                sx={{ mb: 3 }}
-              >
-                Interactive reference for all 58 Playwright commands
-              </Typography>
-            </Box>
+            <SectionHeader 
+              title="Playwright Commands Dashboard"
+              subtitle="Interactive reference for all 58 Playwright commands"
+              variant="page"
+            />
 
             <SearchBar 
               searchTerm={searchTerm}
@@ -108,7 +100,11 @@ const AppContent: React.FC = () => {
               activeCategory={selectedCategory}
             />
             
-            <Box sx={{ flexGrow: 1, width: '100%' }}>
+            <Box sx={{ 
+              flexGrow: 1, 
+              ...commonStyles.flexColumn,
+              ...commonStyles.fullWidth
+            }}>
               <CommandGrid 
                 commands={filteredCommands}
                 onCommandClick={handleCommandClick}

@@ -1,28 +1,12 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import type { PlaywrightCommand } from '../types/command';
+import { getCategoryColor } from '../utils/categoryUtils';
 
 interface CommandCardProps {
   command: PlaywrightCommand;
   onClick: (command: PlaywrightCommand) => void;
 }
-
-const getCategoryColor = (category: string) => {
-  switch (category) {
-    case 'locators':
-      return '#3b82f6';
-    case 'actions':
-      return '#10b981';
-    case 'assertions':
-      return '#f59e0b';
-    case 'navigation':
-      return '#8b5cf6';
-    case 'browser':
-      return '#ef4444';
-    default:
-      return '#6b7280';
-  }
-};
 
 const CommandCard: React.FC<CommandCardProps> = ({ command, onClick }) => {
   const categoryColor = getCategoryColor(command.category);

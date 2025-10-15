@@ -13,29 +13,13 @@ import {
 } from '@mui/material';
 import { Close, Code, Link } from '@mui/icons-material';
 import type { PlaywrightCommand } from '../types/command';
+import { getCategoryColor } from '../utils/categoryUtils';
 
 interface CommandModalProps {
   command: PlaywrightCommand | null;
   open: boolean;
   onClose: () => void;
 }
-
-const getCategoryColor = (category: string) => {
-  switch (category) {
-    case 'locators':
-      return '#3b82f6';
-    case 'actions':
-      return '#10b981';
-    case 'assertions':
-      return '#f59e0b';
-    case 'navigation':
-      return '#8b5cf6';
-    case 'browser':
-      return '#ef4444';
-    default:
-      return '#6b7280';
-  }
-};
 
 const CommandModal: React.FC<CommandModalProps> = ({ command, open, onClose }) => {
   if (!command) return null;
