@@ -7,7 +7,6 @@ import Footer from './components/Footer';
 import CommandGrid from './components/CommandGrid';
 import CategoryLegend from './components/CategoryLegend';
 import CommandModal from './components/CommandModal';
-import SectionHeader from './components/common/SectionHeader';
 import { commonStyles } from './utils/styleConstants';
 import { playwrightCommands, searchCommands, getCommandsByCategory } from './data/playwrightCommands';
 import type { PlaywrightCommand } from './types/command';
@@ -53,6 +52,14 @@ const AppContent: React.FC = () => {
     setSelectedCategory(category);
   };
 
+  const handleRelatedCommandClick = (commandName: string) => {
+    const relatedCommand = playwrightCommands.find(cmd => cmd.name === commandName);
+    if (relatedCommand) {
+      setSelectedCommand(relatedCommand);
+      setModalOpen(true);
+    }
+  };
+
   return (
     <Box sx={{ 
       minHeight: '100vh', 
@@ -83,12 +90,6 @@ const AppContent: React.FC = () => {
             marginRight: 0,
           }}
         >
-            <SectionHeader 
-              title="Playwright Commands Dashboard"
-              subtitle="Interactive reference for all 58 Playwright commands"
-              variant="page"
-            />
-
             <SearchBar 
               searchTerm={searchTerm}
               onSearchChange={setSearchTerm}
@@ -120,6 +121,7 @@ const AppContent: React.FC = () => {
         command={selectedCommand}
         open={modalOpen}
         onClose={handleCloseModal}
+        onRelatedCommandClick={handleRelatedCommandClick}
       />
     </Box>
   );
