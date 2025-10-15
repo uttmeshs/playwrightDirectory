@@ -22,9 +22,6 @@ const Footer: React.FC = () => {
     >
       <Container maxWidth="xl">
         <Box sx={{ textAlign: 'center' }}>
-         
-        
-          
           {/* Social Links */}
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 3 }}>
             <IconButton
