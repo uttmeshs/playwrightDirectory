@@ -4,7 +4,7 @@ A comprehensive, interactive dashboard for Playwright automation testing command
 
 ## Live Demo
 
-**[Try it live at https://playwrightdirectory.netlify.app/](https://playwrightdirectory.netlify.app/)**
+**[https://playwrightdirectory.netlify.app/](https://playwrightdirectory.netlify.app/)**
 
 ## Features
 
